@@ -1,0 +1,6 @@
+/* minimal placeholder styles; add Tailwind per README if you want nicer UI */
+body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin: 0; padding: 0; }
+.p-8 { padding: 2rem; }
+.text-2xl { font-size: 1.5rem; }
+.font-bold { font-weight: 700; }
+.mt-4 { margin-top: 1rem; }
