@@ -153,13 +153,27 @@ app.get('/tasks', authMiddleware, async (req, res) => {
   try {
     let q = 'SELECT * FROM tasks WHERE (created_by=$1 OR assignee_id=$1)';
     const params = [req.user.id];
-    if (project_id) { params.push(project_id); q += f" AND project_id=${{params.length}}"; }
-    if (status) { params.push(status); q += f" AND status=${{params.length}}"; }
+
+    if (project_id) {
+      params.push(project_id);
+      q += ` AND project_id=$${params.length}`;
+    }
+    if (status) {
+      params.push(status);
+      q += ` AND status=$${params.length}`;
+    }
+
     q += ' ORDER BY created_at DESC';
     const r = await client.query(q, params);
     res.json(r.rows);
-  } catch (e) { console.error(e); res.status(500).json({ error: 'could not list tasks' }); } finally { client.release(); }
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'could not list tasks' });
+  } finally {
+    client.release();
+  }
 });
+
 
 // Start
 const PORT = process.env.PORT || 4000;
