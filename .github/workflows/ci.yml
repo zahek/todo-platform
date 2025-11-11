@@ -1,0 +1,21 @@
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install backend deps
+        run: |
+          cd backend
+          npm ci
+      - name: Install frontend deps
+        run: |
+          cd frontend
+          npm ci
+      - name: Run backend tests (placeholder)
+        run: echo "Add tests"
